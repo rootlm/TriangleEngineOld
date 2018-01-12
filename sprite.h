@@ -8,16 +8,12 @@
 #include "math2.h"
 #include "globaldef.h"
 
-#ifdef RENDERER_SDL
-	#include <SDL.h>
-#endif
-
 #ifndef __SPRITE__
 #define __SPRITE__
 
 //#define MAXSPRITES 512
 unsigned short MAXSPRITES; //made it configurable because of spritedata file
-unsigned short SpriteSheetAmount;
+unsigned short MAXSPRITESHEETS;
 
 	#define spr_player 0
 

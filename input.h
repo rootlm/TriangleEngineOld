@@ -12,8 +12,8 @@ int RightButton;
 int UpButton;
 int DownButton;
 
-Uint8* KeyboardPrevious;
-Uint8* KeyboardCurrent;
+unsigned char* KeyboardPrevious;
+unsigned char* KeyboardCurrent;
 
 void InitKeys();
 char keyboard_check(char statetocheck);

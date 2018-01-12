@@ -5,8 +5,10 @@
 #include <math.h>
  
 #include <stdbool.h>
+#include "globaldef.h"
 #include "math2.h"
 #include "object.h"
+#include "objectfunctions.h"
 #include "sprite.h"
 #include "input.h"
 #include "render.h"
@@ -32,7 +34,15 @@ unsigned short createobject(unsigned short type,float x,float y) {
 			case 0:
 					obj_player_create(i);
 				break;
-			//add other create function calls here
+			case 1:
+					obj_playershot_create(i);
+				break;
+			case 2:
+					obj_catfairy_create(i);
+				break;
+			case 3:
+					obj_catfairyshot_create(i);
+				break;
 		}
 		objects[i]->x = x;
 		objects[i]->y = y;
@@ -61,43 +71,6 @@ void deleteobject(unsigned short id) {
 	}
 }
 
-//-----create
-
-/*void obj_TEMPLATE_create(unsigned short id) {
-
-}*/
-
-void obj_player_create(unsigned short id) {
-	objects[id]=calloc(1,sizeof(obj_player));
-	objects[id]->hp = 100;
-}
-
-
-//-----step
-
-/*void obj_TEMPLATE_step(unsigned short id) {
-
-}*/
-
-void obj_player_step(unsigned short id) {
-	if (((obj_player*)objects[id])->shoottimer != 0) {
-		((obj_player*)objects[id])->shoottimer -= 1;
-	}
-	if (keyboard_check(LeftButton)) {
-		objects[id]->x-=7;
-	}
-	if (keyboard_check(RightButton)) {
-		objects[id]->x+=7;
-	}
-	if (keyboard_check(UpButton)) {
-		objects[id]->y-=7;
-	}
-	if (keyboard_check(DownButton)) {
-		objects[id]->y+=7;
-	}
-
-}
-
 //---OBJECTUPDATE
 void ObjectsUpdate() {
 	unsigned short i=0;
@@ -107,7 +80,15 @@ void ObjectsUpdate() {
 				case 0:
 					obj_player_step(i);
 					break;
-				//add other step function calls here
+				case 1:
+					obj_playershot_step(i);
+					break;
+				case 2:
+					obj_catfairy_step(i);
+					break;
+				case 3:
+					obj_catfairyshot_step(i);
+					break;
 				}
 			}
 		i++;
