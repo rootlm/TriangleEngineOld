@@ -33,4 +33,8 @@ Engine_Texture* Engine_LoadGraphic(const char* loadgfxfilename);
 	#define Renderer_SetDrawColor(r,g,b,a) SDL_SetRenderDrawColor(renderer,r,g,b,a)
 	#define Renderer_Clear() SDL_RenderClear(renderer)
 	#define Renderer_Present() SDL_RenderPresent(renderer)
+#else
+	#define Renderer_SetDrawColor(r,g,b,a)
+	#define Renderer_Clear()
+	#define Renderer_Present()
 #endif
