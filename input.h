@@ -1,4 +1,4 @@
-#include <SDL.h>
+#include "globaldef.h"
 #ifndef __INPUT__
 #define __INPUT__
 //Init Key Settings

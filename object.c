@@ -80,15 +80,6 @@ void ObjectsUpdate() {
 				case 0:
 					obj_player_step(i);
 					break;
-				case 1:
-					obj_playershot_step(i);
-					break;
-				case 2:
-					obj_catfairy_step(i);
-					break;
-				case 3:
-					obj_catfairyshot_step(i);
-					break;
 				}
 			}
 		i++;
