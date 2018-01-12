@@ -44,48 +44,6 @@ typedef struct {
 	unsigned char shoottimer;
 } obj_player;
 
-typedef struct {
-	unsigned short type;
-	float x;
-	float y;
-	float xspeed;
-	float yspeed;
-	unsigned char depth;
-	unsigned short sprite;
-	float frame;
-	float framespeed;
-	unsigned char state;
-	unsigned char hp;
-} obj_playershot;
-
-typedef struct {
-	unsigned short type;
-	float x;
-	float y;
-	float xspeed;
-	float yspeed;
-	unsigned char depth;
-	unsigned short sprite;
-	float frame;
-	float framespeed;
-	unsigned char state;
-	unsigned char hp;
-} obj_catfairy;
-
-typedef struct {
-	unsigned short type;
-	float x;
-	float y;
-	float xspeed;
-	float yspeed;
-	unsigned char depth;
-	unsigned short sprite;
-	float frame;
-	float framespeed;
-	unsigned char state;
-	unsigned char hp;
-} obj_catfairyshot;
-
 obj_example** objects; //OBJECT ARRAY FUCK
 
 void InitObjects();
