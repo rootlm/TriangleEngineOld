@@ -34,15 +34,6 @@ unsigned short createobject(unsigned short type,float x,float y) {
 			case 0:
 					obj_player_create(i);
 				break;
-			case 1:
-					obj_playershot_create(i);
-				break;
-			case 2:
-					obj_catfairy_create(i);
-				break;
-			case 3:
-					obj_catfairyshot_create(i);
-				break;
 		}
 		objects[i]->x = x;
 		objects[i]->y = y;
