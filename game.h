@@ -10,12 +10,6 @@
 #include "sprite.h"
 #include "bfont.h"
 
-#ifdef RENDERER_SDL
-	#include <SDL.h>
-	#include <SDL_image.h>
-	#include <SDL_rwops.h>
-	#include <SDL_keyboard.h>
-#endif
-
 //void ObjectsUpdate();
 void Game_Step();
+void Game_Quit();

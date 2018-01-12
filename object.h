@@ -5,6 +5,7 @@
 #include <math.h>
  
 #include <stdbool.h>
+#include "globaldef.h"
 #include "math2.h"
 
 #ifndef __OBJECT__
@@ -43,10 +44,54 @@ typedef struct {
 	unsigned char shoottimer;
 } obj_player;
 
+typedef struct {
+	unsigned short type;
+	float x;
+	float y;
+	float xspeed;
+	float yspeed;
+	unsigned char depth;
+	unsigned short sprite;
+	float frame;
+	float framespeed;
+	unsigned char state;
+	unsigned char hp;
+} obj_playershot;
+
+typedef struct {
+	unsigned short type;
+	float x;
+	float y;
+	float xspeed;
+	float yspeed;
+	unsigned char depth;
+	unsigned short sprite;
+	float frame;
+	float framespeed;
+	unsigned char state;
+	unsigned char hp;
+} obj_catfairy;
+
+typedef struct {
+	unsigned short type;
+	float x;
+	float y;
+	float xspeed;
+	float yspeed;
+	unsigned char depth;
+	unsigned short sprite;
+	float frame;
+	float framespeed;
+	unsigned char state;
+	unsigned char hp;
+} obj_catfairyshot;
+
 obj_example** objects; //OBJECT ARRAY FUCK
 
 void InitObjects();
 unsigned short createobject(unsigned short type,float x,float y);
 void deleteobject(unsigned short id);
+
+void ObjectsUpdate();
 
 #endif

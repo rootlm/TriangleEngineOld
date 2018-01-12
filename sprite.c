@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <malloc.h>
 #include <string.h>
 #include <math.h>
@@ -9,24 +10,20 @@
 #include "sprite.h"
 #include "globaldef.h"
 
-#ifdef RENDERER_SDL
-	#include <SDL.h>
-#endif
-
 void LoadSpriteData(const char* spritedatafname) {
 	FILE* file = fopen(spritedatafname,"r");
 		unsigned short i = 0;
 		unsigned char i2 = 0;
-		unsigned char* tempchar = calloc(2,sizeof(unsigned char));// = malloc(sizeof(unsigned char));
-		unsigned char* fname = calloc(24+strlen(sprfolder)+strlen(sprfextension),sizeof(unsigned char));
+		char* tempchar = calloc(2,sizeof(unsigned char));// = malloc(sizeof(unsigned char));
+		char* fname = calloc(24+strlen(sprfolder)+strlen(sprfextension),sizeof(unsigned char));
 		strcat(fname,sprfolder);
 		bool loadedstr = false;
 		if (file != NULL) {
 			fseek(file,6,0); //ignore the header for now
-			fread(&SpriteSheetAmount,2,1,file); //read spritesheet amount
-			SpriteSheets = (Engine_Texture *) calloc(SpriteSheetAmount,sizeof(Engine_Texture*));
-			printf("SpriteSheetAmount:%i\n",SpriteSheetAmount);
-			while (i < SpriteSheetAmount) {
+			fread(&MAXSPRITESHEETS,2,1,file); //read spritesheet amount
+			SpriteSheets = (Engine_Texture *) calloc(MAXSPRITESHEETS,sizeof(Engine_Texture*));
+			printf("MAXSPRITESHEETS:%i\n",MAXSPRITESHEETS);
+			while (i < MAXSPRITESHEETS) {
 				i2=0;
 				loadedstr=false;
 				while (!loadedstr && i2 < 24) {
@@ -89,23 +86,4 @@ void InitSprites() {
 	SpriteData = (sprite *) calloc(MAXSPRITES,sizeof(sprite));
 
 	LoadSpriteData("spritedata.dat");
-
-	/*SpriteData[0].animlength=0;
-	SpriteData[0].sheet=0;
-	SpriteData[0].xoff=33;
-	SpriteData[0].yoff=33;
-	SpriteData[0].framerect.x=0;
-	SpriteData[0].framerect.y=0;
-	SpriteData[0].framerect.w=66;
-	SpriteData[0].framerect.h=66;*/
 }
-
-/*typedef struct {
-	SDL_Rect framerect;
-	unsigned char animlength;
-	unsigned char* anim; //array the size of animlength, each frame is a number of how many sprite widths past the framerect
-	//if animlength is 0 don't allocate anim i guess, and i'll have drawing functions take that into account..
-	SDL_Texture* sheet;
-	unsigned short xoff; //offset
-	unsigned short yoff;
-} sprite;*/

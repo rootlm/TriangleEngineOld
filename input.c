@@ -1,8 +1,5 @@
 #include "globaldef.h"
 #include "input.h"
-#ifdef INPUT_SDL
-	#include <SDL.h>
-#endif
 
 void InitKeys() {
 #ifdef INPUT_SDL
@@ -17,8 +14,8 @@ UpButton = SDL_SCANCODE_UP;
 DownButton = SDL_SCANCODE_DOWN;
 #endif
 
-KeyboardPrevious = calloc(127,sizeof(Uint8));
-KeyboardCurrent = calloc(127,sizeof(Uint8));
+KeyboardPrevious = calloc(127,sizeof(unsigned char));
+KeyboardCurrent = calloc(127,sizeof(unsigned char));
 }
 
 char keyboard_check(char statetocheck) {
@@ -53,9 +50,9 @@ else {
 
 void UpdateKeys() {
 	#ifdef INPUT_SDL
-	const Uint8 *keyboard = SDL_GetKeyboardState(NULL);
+	const unsigned char *keyboard = SDL_GetKeyboardState(NULL);
 	#else //fake a keyboard by making an array every time this function is called if no input method
-		Uint8* keyboard = (Uint8 *) calloc(127,sizeof(Uint8));
+		unsigned char* keyboard = (unsigned char *) calloc(127,sizeof(unsigned char));
 		unsigned char i2 = 0;
 		while (i2 < 127) {
 			keyboard[i2]=0;

@@ -14,11 +14,14 @@ bool quit;
 unsigned char GAME_STATE;
 
 //define data folders
-#define sprfolder "spr/"
-#define fontfolder "fonts/"
+#define sprfolder "data/spr/"
+#define fontfolder "data/fonts/"
 
 //and file extensions?
 #define sprfextension ".png"
+
+//platform 
+#define PLATFORM_PC
 
 //renderer (the idea is that if you don't define a renderer the game will run but you won't be able to see anything obviously)
 #define RENDERER_SDL
@@ -39,4 +42,14 @@ unsigned char GAME_STATE;
 	} Renderer_Rect;
 #endif
 
+#endif
+
+//GLOBAL INCLUDES
+
+#ifdef RENDERER_SDL
+	#include <SDL.h>
+	#include <SDL_image.h>
+	#ifdef INPUT_SDL //just incase i ever make it use sdl for rendering but not input (probably not but eh)
+		#include <SDL_keyboard.h>
+	#endif
 #endif

@@ -2,6 +2,8 @@
 #include "render.h"
 #include "globaldef.h"
 #include "sprite.h"
+#include <malloc.h>
+#include <stdlib.h>
 
 //Renderer includes
 #ifdef RENDERER_SDL
@@ -10,7 +12,7 @@
 #endif
 
 void InitWindow() {
-
+//SDL2
 #ifdef RENDERER_SDL
 	//Initialize SDL
 	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
@@ -48,7 +50,21 @@ void InitWindow() {
 #endif
 }
 
+void EventHandler() {
+	#ifdef RENDERER_SDL
+	while (SDL_PollEvent(&evunion) != 0 )
+	{
+		//User requests quit
+		if (evunion.type == SDL_QUIT)
+		{
+		quit = true;
+		}
+	}
+	#endif
+}
+
 Engine_Texture* Engine_LoadGraphic(const char* loadgfxfilename) {
+//SDL2
 #ifdef RENDERER_SDL
 
 	Engine_Texture* newTexture = NULL;
@@ -71,6 +87,7 @@ Engine_Texture* Engine_LoadGraphic(const char* loadgfxfilename) {
 }
 
 void draw_sprite_ext(short dsprite,unsigned short dsfrm,float dsx,float dsy,float dxsc,float dysc,short dsrot) {
+//SDL2
 #ifdef RENDERER_SDL
 	SDL_Point* dspriteoffset; //self explanatory
 		dspriteoffset = (SDL_Point *) malloc(sizeof(SDL_Point));
@@ -101,8 +118,6 @@ void draw_sprite_ext(short dsprite,unsigned short dsfrm,float dsx,float dsy,floa
 	dspriteoffset->x *= dxsc;
 	dspriteoffset->y *= dysc;
 	SDL_RenderCopyEx(renderer,SpriteSheets[SpriteData[dsprite].sheet],dspritefrect,dspriterect,dsrot,dspriteoffset,SDL_FLIP_NONE);
-//SDL_SetRenderDrawColor(renderer,255,255,255,255);
-//SDL_RenderDrawRect(renderer,dspritefrect);
 	if (dspriterect != NULL) {
 		free(dspriterect);
 	}

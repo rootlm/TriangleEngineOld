@@ -2,16 +2,15 @@
 #include "render.h"
 #include "bfont.h"
 #include <stdio.h>
-
-#ifdef RENDERER_SDL
-	#include <SDL.h>
-#endif
+#include <string.h>
+#include <malloc.h>
+#include <stdlib.h>
 
 BitmapFont* Engine_LoadFont(const char* fontfname) {
 	BitmapFont* loadfont;
 	loadfont = (BitmapFont *) malloc(sizeof(BitmapFont));
 		//add png to the filename
-		unsigned char* fucking = calloc(strlen(fontfolder)+strlen(fontfname)+4,sizeof(unsigned char));
+		char* fucking = calloc(strlen(fontfolder)+strlen(fontfname)+5,sizeof(unsigned char));
 		strcpy(fucking,fontfolder);
 		strcat(fucking,fontfname);
 		strcat(fucking,".png");
@@ -24,7 +23,7 @@ BitmapFont* Engine_LoadFont(const char* fontfname) {
 	if (loadfontrectsfile != NULL) { //if file actually exists
 		unsigned short fontnumchars;
 		fread(&fontnumchars,2,1,loadfontrectsfile);
-		loadfont->fontrects= (SDL_Rect *) calloc(fontnumchars,sizeof(Renderer_Rect));
+		loadfont->fontrects= (Renderer_Rect *) calloc(fontnumchars,sizeof(Renderer_Rect));
 		unsigned short fontloadi=0;
 		//load rects
 		while (fontloadi < fontnumchars) {
@@ -35,7 +34,9 @@ BitmapFont* Engine_LoadFont(const char* fontfname) {
 			fontloadi += 1;
 		}
 		fclose(loadfontrectsfile);
-		free(fucking);
+		if (fucking != NULL) {
+			free(fucking);
+		}
 	}
 	else {
 		printf("Error loading font file %s!\n",fucking);
@@ -47,8 +48,8 @@ return loadfont;
 void draw_text(BitmapFont* drawfont, short dtx, short dty, const char* drawstr) {
 #ifdef RENDERER_SDL
 	unsigned char i=0;
-	SDL_Rect* drawcharrect;
-	drawcharrect = (SDL_Rect *) malloc(sizeof(SDL_Rect));
+	Renderer_Rect* drawcharrect;
+	drawcharrect = (Renderer_Rect *) malloc(sizeof(Renderer_Rect));
 	drawcharrect->x=dtx;
 	drawcharrect->y=dty;
 		//while (i <= 11) {
@@ -63,6 +64,6 @@ void draw_text(BitmapFont* drawfont, short dtx, short dty, const char* drawstr) 
 		free(drawcharrect);
 	}
 #else
-	printf("No renderer. Draw_text:%i\n",drawstr);
+	printf("No renderer. Draw_text:%s\n",drawstr);
 #endif
 }
