@@ -1,2 +1,2 @@
 # TriangleEngine
-c/sdl2 game engine thing (new version)
+c/sdl2 game engine thing (not actually new version)
